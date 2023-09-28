@@ -94,7 +94,7 @@ const LayoutBase = props => {
                     {/* 右侧栏 */}
                     <SideRight {...props} />
                 </div>
-                <AdSlot type='native' />
+                
             </main>
 
             {/* 悬浮菜单 */}
