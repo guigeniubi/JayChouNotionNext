@@ -7,7 +7,9 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:@next/next/recommended',
-    'standard'
+    'standard',
+    'next/core-web-vitals',
+    'plugin:@typescript-eslint/recommended'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -16,10 +18,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: [
-    'react',
-    'react-hooks'
-  ],
+  plugins: ['react', 'react-hooks', '@typescript-eslint'],
   settings: {
     react: {
       version: 'detect'
@@ -30,9 +29,11 @@ module.exports = {
     'react/no-unknown-property': 'off', // <style jsx>
     'react/prop-types': 'off',
     'space-before-function-paren': 0,
-    'react-hooks/rules-of-hooks': 'error' // Checks rules of Hooks
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   globals: {
     React: true
-  }
+  },
+  parser: '@typescript-eslint/parser'
 }
