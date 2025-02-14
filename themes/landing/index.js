@@ -1,4 +1,3 @@
-
 'use client'
 
 /**
@@ -34,43 +33,44 @@ const THEME_CONFIG = { THEME: 'landing' }
  * @param {*} props
  * @returns
  */
-const LayoutBase = (props) => {
-    const { meta, siteInfo, children } = props
+const LayoutBase = props => {
+  const { meta, siteInfo, children } = props
 
-    return <div id='theme-landing' className="overflow-hidden flex flex-col justify-between bg-white">
+  return (
+    <div
+      id="theme-landing"
+      className="overflow-hidden flex flex-col justify-between bg-white"
+    >
+      {/* 网页SEO */}
+      <CommonHead meta={meta} siteInfo={siteInfo} />
 
-        {/* 网页SEO */}
-        <CommonHead meta={meta} siteInfo={siteInfo} />
+      {/* 顶部导航栏 */}
+      <Header />
 
-        {/* 顶部导航栏 */}
-        <Header />
+      {/* 内容 */}
+      <div id="content-wrapper">{children}</div>
 
-        {/* 内容 */}
-        <div id='content-wrapper'>
-            {children}
-        </div>
-
-        {/* 底部页脚 */}
-        <Footer />
+      {/* 底部页脚 */}
+      <Footer />
     </div>
+  )
 }
-
 
 /**
  * 首页布局
  * @param {*} props
  * @returns
  */
-const LayoutIndex = (props) => {
-    return (
-        <LayoutBase {...props}>
-            <Hero />
-            <Features />
-            <FeaturesBlocks />
-            <Testimonials />
-            <Newsletter />
-        </LayoutBase>
-    )
+const LayoutIndex = props => {
+  return (
+    <LayoutBase {...props}>
+      <Hero />
+      <Features />
+      <FeaturesBlocks />
+      <Testimonials />
+      <Newsletter />
+    </LayoutBase>
+  )
 }
 
 /**
@@ -78,41 +78,73 @@ const LayoutIndex = (props) => {
  * @param {*} props
  * @returns
  */
-const LayoutSlug = (props) => {
-    // 如果 是 /article/[slug] 的文章路径则进行重定向到另一个域名
-    const router = useRouter()
-    if (JSON.parse(CONFIG.POST_REDIRECT_ENABLE) && isBrowser && router.route == '/[prefix]/[slug]') {
-        const redirectUrl = CONFIG.POST_REDIRECT_URL + router.asPath.replace('?theme=landing', '')
-        router.push(redirectUrl)
-        return  <div id='theme-landing'><Loading /></div>
-    }
+const LayoutSlug = props => {
+  // 如果 是 /article/[slug] 的文章路径则进行重定向到另一个域名
+  const router = useRouter()
+  if (
+    JSON.parse(CONFIG.POST_REDIRECT_ENABLE) &&
+    isBrowser &&
+    router.route == '/[prefix]/[slug]'
+  ) {
+    const redirectUrl =
+      CONFIG.POST_REDIRECT_URL + router.asPath.replace('?theme=landing', '')
+    router.push(redirectUrl)
+    return (
+      <div id="theme-landing">
+        <Loading />
+      </div>
+    )
+  }
 
-    return <LayoutBase {...props}>
-
-        <div id='container-inner' className='mx-auto max-w-screen-lg p-12'>
-            <NotionPage {...props} />
-        </div>
+  return (
+    <LayoutBase {...props}>
+      <div id="container-inner" className="mx-auto max-w-screen-lg p-12">
+        <NotionPage {...props} />
+      </div>
     </LayoutBase>
-
-
+  )
 }
 
 // 其他布局暂时留空
-const LayoutSearch = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
-const LayoutArchive = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
-const Layout404 = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
-const LayoutCategoryIndex = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
-const LayoutPostList = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
-const LayoutTagIndex = (props) => <LayoutBase {...props}><Hero /></LayoutBase>
+const LayoutSearch = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
+const LayoutArchive = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
+const Layout404 = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
+const LayoutCategoryIndex = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
+const LayoutPostList = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
+const LayoutTagIndex = props => (
+  <LayoutBase {...props}>
+    <Hero />
+  </LayoutBase>
+)
 
 export {
-    THEME_CONFIG,
-    LayoutIndex,
-    LayoutSearch,
-    LayoutArchive,
-    LayoutSlug,
-    Layout404,
-    LayoutPostList,
-    LayoutCategoryIndex,
-    LayoutTagIndex
+  THEME_CONFIG,
+  LayoutIndex,
+  LayoutSearch,
+  LayoutArchive,
+  LayoutSlug,
+  Layout404,
+  LayoutPostList,
+  LayoutCategoryIndex,
+  LayoutTagIndex
 }
