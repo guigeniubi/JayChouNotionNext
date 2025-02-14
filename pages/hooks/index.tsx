@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
-import { TypewriterDemo } from '@/pages/hooks/components/TypewriterDemo'
-import { FadeInDemo } from '@/pages/hooks/components/FadeInDemo'
+import { TypewriterDemo } from '@/components/demos/TypewriterDemo'
+import { FadeInDemo } from '@/components/demos/FadeInDemo'
 
 // 页面组件
 const HookPage = () => {
